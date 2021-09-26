@@ -8,7 +8,7 @@ public class Stack<T> {
 	}
 	
 	public void push(T e) {
-		StackNode<T> NewNode = new StackNode<>(e)
+		StackNode<T> NewNode = new StackNode<>(e);
 		if(first == null) {
 			first = NewNode;
 		} else {
