@@ -7,7 +7,6 @@ public class Stack<T> implements basicOperations<T>{
 		
 	}
 	
-	@Override
 	public T peek() {
 		return first.getElement();
 	}
@@ -23,7 +22,7 @@ public class Stack<T> implements basicOperations<T>{
 
 	@Override
 	public void add(T e) {
-		StackNode<T> NewNode = new StackNode<>(e)
+		StackNode<T> NewNode = new StackNode<>(e);
 				if(first == null) {
 					first = NewNode;
 				} else {
