@@ -1,12 +1,13 @@
 package structures;
 
-public class Queue<T> {
+public class Queue<T> implements basicOperations<T>{
 	private QueueNode<T> first;
 	
 	public Queue() {
 		
 	}
 	
+	@Override
 	public void add(T e) {
 		QueueNode<T> newNode = new QueueNode<T>(e);
 		
@@ -23,7 +24,17 @@ public class Queue<T> {
 		}
 	}
 	
-	public void dequeue() {
+	@Override
+	public T peek() {
+		if (first != null) {
+			return first.getElement();
+		} else {
+			return null;
+		}
+	}
+
+	@Override
+	public void pop() {
 		if (first != null) {
 			if (first.getNext() != null) {
 				first.setNext(first.getNext());
@@ -31,9 +42,5 @@ public class Queue<T> {
 				first = null;
 			} 
 		}
-	}
-	
-	public T peek() {
-		return first.getElement();
 	}
 }
