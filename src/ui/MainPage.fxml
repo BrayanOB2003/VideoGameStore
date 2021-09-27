@@ -83,6 +83,11 @@
                                     <Insets left="5.0" right="5.0" top="10.0" />
                                  </VBox.margin>
                               </TextField>
+                              <TextField fx:id="shelfSize" alignment="CENTER" promptText="# videojuegos">
+                                 <VBox.margin>
+                                    <Insets left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                              </TextField>
                               <Label text="Videojuegos">
                                  <font>
                                     <Font size="16.0" />
@@ -126,6 +131,11 @@
                                  </children>
                               </HBox>
                               <Button mnemonicParsing="false" onAction="#addGameToPrice" text="Añadir" />
+                              <Button mnemonicParsing="false" onAction="#shelfArranged" text="Estantería lista">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" top="5.0" />
+                                 </VBox.margin>
+                              </Button>
                            </children>
                         </VBox>
                         <VBox GridPane.columnIndex="1" GridPane.rowIndex="2">
@@ -163,6 +173,13 @@
                      </children>
                   </GridPane>
                </center>
+               <bottom>
+                  <Button mnemonicParsing="false" onAction="#createCase" text="Crear caso" BorderPane.alignment="CENTER">
+                     <BorderPane.margin>
+                        <Insets bottom="5.0" />
+                     </BorderPane.margin>
+                  </Button>
+               </bottom>
             </BorderPane>
             <BorderPane prefHeight="535.0" prefWidth="396.0">
                <top>
