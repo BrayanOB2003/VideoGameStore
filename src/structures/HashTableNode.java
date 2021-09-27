@@ -53,6 +53,6 @@ public class HashTableNode <K,V>{
 
 
 	public void setNext(HashTableNode<K, V> next) {
-		this.next = next;s
+		this.next = next;
 	}
 }
