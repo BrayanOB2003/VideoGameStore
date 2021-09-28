@@ -1,7 +1,5 @@
 package model;
 
-import javax.xml.bind.helpers.AbstractMarshallerImpl;
-
 public class Store {
 	private int cachier;
 	private Shelf[] shelves;
