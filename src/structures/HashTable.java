@@ -8,6 +8,7 @@ public class HashTable<K,V> implements HashTableOperations<K, V>{
 		shelf = (HashTableLinkedList<K, V>[]) new HashTableLinkedList[s];
 		size = 0;
 	}
+	
 
 	@Override
 	public boolean insert(K k, V v) {

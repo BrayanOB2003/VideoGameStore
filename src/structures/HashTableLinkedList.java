@@ -153,6 +153,15 @@ public class HashTableLinkedList<K, V> {
 	public void setSize(int size) {
 		this.size = size;
 	}
+	
+	public boolean contains(K v){
+		if(search(v)!=null) {
+			return true;
+		}else {
+			return false;
+		}
+		
+	}
 
 	public boolean modify(K k,V v) {
 		boolean status = false;
@@ -163,7 +172,7 @@ public class HashTableLinkedList<K, V> {
 		{
 			HashTableNode<K, V> current = root;
 			
-			while (root != null && !status)
+			while (current != null && !status)
 			{
 				if (current.isTheKey(k))
 				{
