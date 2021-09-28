@@ -30,7 +30,7 @@ class QueueTest{
 		
 		assertTrue(queueTest.getSize()==5);
 		
-		assertTrue(queueTest.toString().equals("1 2 3 4 2 "));
+		assertTrue(queueTest.toString().equals("1 2 3 4 2"));
 		
 	}
 	
@@ -42,7 +42,7 @@ class QueueTest{
 		
 		assertTrue(queueTest.getSize()==3);
 		System.out.println(queueTest.toString());
-		assertTrue(queueTest.toString().equals("2 3 4 "));
+		assertTrue(queueTest.toString().equals("2 3 4"));
 		
 	}
 	

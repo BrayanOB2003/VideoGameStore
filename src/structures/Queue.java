@@ -70,6 +70,8 @@ public class Queue<T> implements basicOperations<T>{
 			tmp=tmp.getNext();
 		}
 		
+		output = output.trim();
+		
 		return output;
 		
 	}
