@@ -11,7 +11,7 @@ public class Queue<T> implements basicOperations<T>{
 	public void add(T e) {
 		QueueNode<T> newNode = new QueueNode<T>(e);
 		
-		if(first != null) {
+		if(first == null) {
 			first = newNode;
 		} else {
 			addElement(first, newNode);

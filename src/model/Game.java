@@ -2,10 +2,10 @@ package model;
 
 public class Game {
 	private double price;
-	private String indentifier;
+	private int indentifier;
 	private int quantity;
 	
-	public Game(double p, String id, int q) {
+	public Game(double p, int id, int q) {
 		price = p;
 		indentifier = id;
 		quantity = q;
@@ -19,11 +19,11 @@ public class Game {
 		this.price = price;
 	}
 
-	public String getIndentifier() {
+	public int getIndentifier() {
 		return indentifier;
 	}
 
-	public void setIndentifier(String indentifier) {
+	public void setIndentifier(int indentifier) {
 		this.indentifier = indentifier;
 	}
 
@@ -34,6 +34,4 @@ public class Game {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-	
-	
 }

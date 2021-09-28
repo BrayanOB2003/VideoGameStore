@@ -5,7 +5,7 @@ import structures.HashTable;
 public class Shelf {
 	private String identifier;
 	private int allGames;
-	private HashTable<String, Game> shelf;
+	private HashTable<Integer, Game> shelf;
 	private Game game;
 	
 	public Shelf(String id, int g) {
@@ -30,12 +30,12 @@ public class Shelf {
 		this.allGames = games;
 	}
 	
-	public void addGames(double p, String id, int q) {
+	public void addGames(double p, int id, int q) {
 		game = new Game(p, id, q);
 		shelf.insert(game.getIndentifier(), game);
 	}
 	
-	public boolean isContent(String id) {
+	public boolean content(int id) {
 		return shelf.contains(id);
 	}
 	
