@@ -32,12 +32,22 @@ public class MainPageGUI {
     private TextArea outputs;
 
     @FXML
-    void addGameToClient(ActionEvent event) {
+    public void addGameToClient(ActionEvent event) {
 
     }
 
     @FXML
-    void addGameToPrice(ActionEvent event) {
+    public void addGameToPrice(ActionEvent event) {
+
+    }
+    
+    @FXML
+    public void createCase(ActionEvent event) {
+
+    }
+    
+    @FXML
+    public void shelfArranged(ActionEvent event) {
 
     }
 

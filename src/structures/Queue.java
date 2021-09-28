@@ -2,7 +2,16 @@ package structures;
 
 public class Queue<T> implements basicOperations<T>{
 	private QueueNode<T> first;
+	private int size;
 	
+	public int getSize() {
+		return size;
+	}
+
+	public void setSize(int size) {
+		this.size = size;
+	}
+
 	public Queue() {
 		
 	}
@@ -13,14 +22,18 @@ public class Queue<T> implements basicOperations<T>{
 		
 		if(first == null) {
 			first = newNode;
+			size++;
 		} else {
 			addElement(first, newNode);
+			size++;
 		}
 	}
 	
 	private void addElement(QueueNode<T> current, QueueNode<T> newElement) {
 		if(current.getNext() == null) {
 			current.setNext(newElement);
+		}else {
+			addElement(current.getNext(), newElement);
 		}
 	}
 	
@@ -37,10 +50,31 @@ public class Queue<T> implements basicOperations<T>{
 	public void pop() {
 		if (first != null) {
 			if (first.getNext() != null) {
-				first.setNext(first.getNext());
+				first = first.getNext();
+				size--;
 			} else {
 				first = null;
 			} 
 		}
 	}
+	
+	@Override
+	public String toString() {
+		
+		String output="";
+		
+		QueueNode<T> tmp = this.first;
+		
+		while (tmp!=null) {
+			output+=tmp.getElement() + " ";
+			tmp=tmp.getNext();
+		}
+		
+		output = output.trim();
+		
+		return output;
+		
+	}
+
+	
 }
