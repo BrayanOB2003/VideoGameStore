@@ -30,4 +30,6 @@ public class Stack<T> implements basicOperations<T>{
 					first = NewNode;
 				}
 	}
+
+	
 }
