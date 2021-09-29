@@ -51,9 +51,10 @@ public class Store {
 	public boolean addClient(String id,Integer[] g) {
 		Client newClient = new Client(id, g);
 		boolean added = false;
+		newClient = searchGames(newClient);
+		newClient = searchPhysictGames(newClient);
 		for(int i = 0; i < clients.length; i++) {
 			if(clients[i] == null) {
-				newClient = searchGames(newClient);
 				clients[i] = newClient;
 				i = clients.length;
 				added = true;
@@ -90,7 +91,26 @@ public class Store {
 	    return games;
 	    
 	}
-
+	
+	private Client searchPhysictGames(Client c) {
+		Client client = c;
+		Integer[] games = client.getGames();
+		Game gameAvailable;
+		
+		for (int j = 0; j < shelves.length; j++) {
+			for (int i = 0; i < games.length; i++) {
+				if(shelves[j].content(games[i])) {
+					gameAvailable = shelves[j].getGame(games[i]);
+					gameAvailable.takeGame();
+					shelves[j].modify(games[i], gameAvailable);
+					c.addPhysicGame(games[i]);
+				}
+			}
+		}
+		
+		return client;
+	}
+	
 	public Shelf[] getShelves() {
 		return shelves;
 	}

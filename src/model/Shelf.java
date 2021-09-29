@@ -6,7 +6,6 @@ public class Shelf {
 	private String identifier;
 	private int allGames;
 	private HashTable<Integer, Game> shelf;
-	private Game game;
 	
 	public Shelf(String id, int g) {
 		identifier = id;
@@ -31,7 +30,7 @@ public class Shelf {
 	}
 	
 	public boolean addGames(double p, int id, int q) {
-		game = new Game(p, id, q);
+		Game game = new Game(p, id, q);
 		return shelf.insert(game.getIndentifier(), game);
 	}
 	
@@ -43,7 +42,7 @@ public class Shelf {
 		return shelf.search(id);
 	}
 
-	public void setGame(Game game) {
-		this.game = game;
+	public boolean modify(int id, Game game) {
+		return shelf.modify(id, game);
 	}
 }

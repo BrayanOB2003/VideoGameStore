@@ -34,4 +34,8 @@ public class Game {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
+	
+	public void takeGame() {
+		quantity--;
+	}
 }

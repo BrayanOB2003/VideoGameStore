@@ -1,11 +1,11 @@
 package model;
 
-import structures.Queue;
+import structures.Stack;
 
 public class Client {
 	private String id;
 	private Integer[] games;
-	private Queue<Integer> physicGames;
+	private Stack<Integer> physicGames;
 	
 	public Client(String id,Integer[] g) {
 		games = g;
@@ -27,11 +27,11 @@ public class Client {
 		this.games = games;
 	}
 
-	public Queue<Integer> getPhysicGames() {
+	public Stack<Integer> getPhysicGames() {
 		return physicGames;
 	}
 
-	public void setPhysicGames(Queue<Integer> physicGames) {
+	public void setPhysicGames(Stack<Integer> physicGames) {
 		this.physicGames = physicGames;
 	}
 	
