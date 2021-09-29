@@ -45,8 +45,4 @@ public class Shelf {
 	public boolean modify(int id, Game game) {
 		return shelf.modify(id, game);
 	}
-	
-	public Game searchGame(int id) {
-		return shelf.search(id);
-	}
 }
