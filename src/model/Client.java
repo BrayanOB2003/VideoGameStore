@@ -65,12 +65,10 @@ public class Client {
 	public String outputsClient() {
 		String output = "";
 		
-		String test = physicGames.toString();
-		
 		output = "********************"+ "\n" +
 		"Cliente: " + id + "\n" +
 		"Orden de recogida: " + getGames2() + "\n" +
-		"Orden de facturación " + test  + "\n" +
+		"Orden de facturación " + toString()  + "\n" +
 		"Precio total de compra " + getPriceAllGame() + "\n" +
 		"****************************";
 		
@@ -97,5 +95,13 @@ public class Client {
 	
 	public int getAllGames() {
 		return games.length;
+	}
+	
+	public String toString() {
+		String out = "";
+		for(int i = 0; i < physicGames.getSize(); i++) {
+			out += " " + physicGames.pop();
+		}
+		return out;
 	}
 }

@@ -48,16 +48,20 @@ public class Stack<T> implements basicOperations<T>{
 		String output="";
 		
 		StackNode<T> tmp = this.first;
-		
-		while (tmp!=null) {
-			output+=tmp.getElement() + " ";
-			tmp=tmp.getNext();
+		if(first != null) {
+			output = toString(tmp, output);
 		}
 		
-		output = output.trim();
-		
 		return output;
-		
+	}
+	
+	private String toString(StackNode<T> current ,String cd) {
+		if(current != null) {
+			cd += " " + current;
+			return toString(current.getNext(), cd);
+		} else {
+			return cd;
+		}
 	}
 	
 	public int getSize() {
