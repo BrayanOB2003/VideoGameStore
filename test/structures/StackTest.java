@@ -39,6 +39,8 @@ class StackTest {
 		
 		stackTest.pop();
 		
+		System.out.println(stackTest.toString());
+		
 		assertTrue(stackTest.toString().equals("3 2 1"));
 		
 		

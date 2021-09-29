@@ -7,4 +7,5 @@ public interface basicOperations<T> {
 	public T peek();
 	public String toString();
 	
+	
 }

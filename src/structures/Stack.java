@@ -47,7 +47,7 @@ public class Stack<T> implements basicOperations<T>{
 		
 		String output="";
 		
-		StackNode<T> tmp = this.first;
+		StackNode<T> tmp = first;
 		
 		while (tmp!=null) {
 			output+=tmp.getElement() + " ";
