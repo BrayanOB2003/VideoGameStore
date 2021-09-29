@@ -1,8 +1,5 @@
 package ui;
 
-
-import java.util.Arrays;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -180,7 +177,7 @@ public class MainPageGUI{
     	String finalS = "";
     	
     	for (int i = 0; i < gameStore.getClients().length; i++) {
-			finalS+=gameStore.getClients()[i];
+			finalS+=gameStore.getClients()[i].outputsClient();
 		}
 
     	outputs.setText(finalS);

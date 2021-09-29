@@ -16,8 +16,11 @@ public class Stack<T> implements basicOperations<T>{
 	public T pop() {
 		T e = null;
 		if(first != null) {
-			e = first.getNext().getElement();
-			first = first.getNext();
+			
+			if(first.getNext()!=null) {
+				e = first.getElement();
+				first = first.getNext();
+			}	
 			
 		} else {
 			first = null;
@@ -56,8 +59,7 @@ public class Stack<T> implements basicOperations<T>{
 		return output;
 		
 	}
-
-
+	
 	public int getSize() {
 		return size;
 	}

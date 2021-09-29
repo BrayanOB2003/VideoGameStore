@@ -71,10 +71,11 @@ public class Store {
 		boolean added = false;
 		newClient = searchGames(newClient);
 		newClient = searchPhysictGames(newClient);
-		newClient = payGames(newClient);
+		//newClient = payGames(newClient);
 		
 		for(int i = 0; i < clients.length && !added; i++) {
 			if(clients[i] == null) {
+				newClient.setTime((i+1) + newClient.getGames().length);
 				clients[i] = newClient;
 				added = true;
 			}
@@ -122,6 +123,7 @@ public class Store {
 					gameAvailable = shelves[j].getGame(games[i]);
 					gameAvailable.takeGame();
 					shelves[j].modify(games[i], gameAvailable);
+
 					client.addPhysicGame(shelves[j].getGame(games[i]));
 				}
 			}
@@ -132,16 +134,48 @@ public class Store {
 	
 	private Client payGames(Client c) {
 		Client client = c;
+		sortClients();
 		Stack<Game> games = client.getPhysicGames();
 		Stack<Game> paidGame = new Stack<>();
+		int aux = 0;
 		
-		for(int i = 0; i < games.getSize(); i++) {
-			paidGame.add(games.pop());
+		for(int i = 0; i < clients.length; i++) {
+			aux = searchMinnor(clients, i);
+			for(int j = aux; j < cachier; j++) {
+				
+			}
+			i += cachier;
 		}
 		
 		client.setPaidGames(paidGame);
 		
 		return client; 
+	}
+	
+	private int searchMinnor(Client[] c, int a) {
+		int index = 0;
+		int aux = a;
+		for (int i = aux; i < cachier; i++) {
+			for (int j = aux; j < cachier; j++) {
+				if(c[i].getAllGames() < c[j].getAllGames()) {
+					index = i;
+				}
+			} 
+		}
+		
+		return index;
+	}
+	
+	private void sortClients() {
+		for(int j = 1; j < clients.length; j++) {
+			for(int i = 0; i < clients.length-j; i++) {
+				if(clients[i].getAllGames() > clients[i+1].getAllGames()) {
+					Client temp = clients[i];
+					clients[i] = clients[i+1];
+					clients[i+1] = temp;
+				}
+			}
+		}
 	}
 	
 	public Shelf[] getShelves() {

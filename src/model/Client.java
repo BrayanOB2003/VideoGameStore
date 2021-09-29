@@ -7,9 +7,13 @@ public class Client {
 	private Integer[] games;
 	private Stack<Game> physicGames;
 	private Stack<Game> paidGames;
+	private int time;
 	
 	public Client(String id,Integer[] g) {
+		physicGames = new Stack<Game>();
+		paidGames = new Stack<>();
 		games = g;
+		this.id = id;
 	}
 
 	public String getId() {
@@ -61,13 +65,37 @@ public class Client {
 	public String outputsClient() {
 		String output = "";
 		
+		String test = physicGames.toString();
+		
 		output = "********************"+ "\n" +
-		"Cliente: " + this.id + "\n" +
-		"Orden de recogida: " + physicGames.toString() + "\n" +
-		"Orden de facturación " + paidGames.toString()  + "\n" +
+		"Cliente: " + id + "\n" +
+		"Orden de recogida: " + getGames2() + "\n" +
+		"Orden de facturación " + test  + "\n" +
 		"Precio total de compra " + getPriceAllGame() + "\n" +
 		"****************************";
 		
 		return output;
+	}
+
+	public int getTime() {
+		return time;
+	}
+	
+	public String getGames2() {
+		String output = "";
+		
+		for (int i = 0; i < games.length; i++) {
+			output+= games[i] + " ";
+			
+		}
+		return output;
+	}
+
+	public void setTime(int time) {
+		this.time = time;
+	}
+	
+	public int getAllGames() {
+		return games.length;
 	}
 }
