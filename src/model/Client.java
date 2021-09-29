@@ -5,7 +5,8 @@ import structures.Stack;
 public class Client {
 	private String id;
 	private Integer[] games;
-	private Stack<Integer> physicGames;
+	private Stack<Game> physicGames;
+	private Stack<Game> paidGames;
 	
 	public Client(String id,Integer[] g) {
 		games = g;
@@ -27,15 +28,33 @@ public class Client {
 		this.games = games;
 	}
 
-	public Stack<Integer> getPhysicGames() {
+	public Stack<Game> getPhysicGames() {
 		return physicGames;
 	}
 
-	public void setPhysicGames(Stack<Integer> physicGames) {
+	public void setPhysicGames(Stack<Game> physicGames) {
 		this.physicGames = physicGames;
 	}
 	
-	public void addPhysicGame(int game) {
+	public void addPhysicGame(Game game) {
 		physicGames.add(game);
+	}
+	
+	public double getPriceAllGame() {
+		double price = 0;
+		for(int i = 0; i < physicGames.getSize(); i++) {
+			price += physicGames.peek().getPrice();
+			physicGames.pop();
+		}
+		
+		return price;
+	}
+
+	public Stack<Game> getPaidGames() {
+		return paidGames;
+	}
+
+	public void setPaidGames(Stack<Game> paidGames) {
+		this.paidGames = paidGames;
 	}
 }

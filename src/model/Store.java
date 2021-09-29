@@ -2,6 +2,8 @@ package model;
 
 import java.util.ArrayList;
 
+import structures.Stack;
+
 public class Store {
 	private int cachier;
 	private Shelf[] shelves;
@@ -69,6 +71,7 @@ public class Store {
 		boolean added = false;
 		newClient = searchGames(newClient);
 		newClient = searchPhysictGames(newClient);
+		newClient = payGames(newClient);
 		
 		for(int i = 0; i < clients.length && !added; i++) {
 			if(clients[i] == null) {
@@ -119,12 +122,26 @@ public class Store {
 					gameAvailable = shelves[j].getGame(games[i]);
 					gameAvailable.takeGame();
 					shelves[j].modify(games[i], gameAvailable);
-					c.addPhysicGame(games[i]);
+					c.addPhysicGame(shelves[j].searchGame(games[i]));
 				}
 			}
 		}
 		
 		return client;
+	}
+	
+	private Client payGames(Client c) {
+		Client client = c;
+		Stack<Game> games = client.getPhysicGames();
+		Stack<Game> paidGame = new Stack<>();
+		
+		for(int i = 0; i < games.getSize(); i++) {
+			paidGame.add(games.pop());
+		}
+		
+		client.setPaidGames(paidGame);
+		
+		return client; 
 	}
 	
 	public Shelf[] getShelves() {

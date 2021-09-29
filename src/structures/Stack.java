@@ -13,12 +13,17 @@ public class Stack<T> implements basicOperations<T>{
 	}
 	
 	@Override
-	public void pop() {
+	public T pop() {
+		T e = null;
 		if(first != null) {
+			e = first.getNext().getElement();
 			first = first.getNext();
+			
 		} else {
 			first = null;
 		}
+		
+		return e;
 	}
 
 	@Override
