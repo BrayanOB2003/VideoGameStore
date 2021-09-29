@@ -1,6 +1,8 @@
 package ui;
 
 
+import java.util.Arrays;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -71,6 +73,7 @@ public class MainPageGUI{
         		sendAlert("Problema de catálogo", "Uno de los códigos ingresados no está en el catálogo, por favor verifique");
         		videogameCode.setText("");
         	}else {
+        		
         		gameStore.addClient(idString, gameList);
             	auxCountClients--;
             	clientId.setText("");
@@ -173,7 +176,14 @@ public class MainPageGUI{
     
     @FXML
     public void createCase(ActionEvent event) {
+    	
+    	String finalS = "";
+    	
+    	for (int i = 0; i < gameStore.getClients().length; i++) {
+			finalS+=gameStore.getClients()[i];
+		}
 
+    	outputs.setText(finalS);
     }
     
     

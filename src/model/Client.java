@@ -57,4 +57,17 @@ public class Client {
 	public void setPaidGames(Stack<Game> paidGames) {
 		this.paidGames = paidGames;
 	}
+	
+	public String outputsClient() {
+		String output = "";
+		
+		output = "********************"+ "\n" +
+		"Cliente: " + this.id + "\n" +
+		"Orden de recogida: " + physicGames.toString() + "\n" +
+		"Orden de facturación " + paidGames.toString()  + "\n" +
+		"Precio total de compra " + getPriceAllGame() + "\n" +
+		"****************************";
+		
+		return output;
+	}
 }

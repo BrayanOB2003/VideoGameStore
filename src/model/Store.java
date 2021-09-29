@@ -122,7 +122,7 @@ public class Store {
 					gameAvailable = shelves[j].getGame(games[i]);
 					gameAvailable.takeGame();
 					shelves[j].modify(games[i], gameAvailable);
-					c.addPhysicGame(shelves[j].searchGame(games[i]));
+					client.addPhysicGame(shelves[j].getGame(games[i]));
 				}
 			}
 		}
