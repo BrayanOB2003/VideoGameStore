@@ -2,6 +2,8 @@ package model;
 
 import java.util.ArrayList;
 
+import structures.Stack;
+
 public class Store {
 	private int cachier;
 	private Shelf[] shelves;
@@ -10,7 +12,7 @@ public class Store {
 	public Store(int shelvesSize, int clientsSize, int c) {
 		shelves = new Shelf[shelvesSize];
 		clients = new Client[clientsSize];
-		cachier = c;
+		setCachier(c);
 	}
 	
 	public boolean createShelf(String id, int g) {
@@ -67,9 +69,12 @@ public class Store {
 	public boolean addClient(String id,Integer[] g) {
 		Client newClient = new Client(id, g);
 		boolean added = false;
+		newClient = searchGames(newClient);
+		newClient = searchPhysictGames(newClient);
+		newClient = payGames(newClient);
+		
 		for(int i = 0; i < clients.length && !added; i++) {
 			if(clients[i] == null) {
-				newClient = searchGames(newClient);
 				clients[i] = newClient;
 				added = true;
 			}
@@ -105,7 +110,40 @@ public class Store {
 	    return games;
 	    
 	}
-
+	
+	private Client searchPhysictGames(Client c) {
+		Client client = c;
+		Integer[] games = client.getGames();
+		Game gameAvailable;
+		
+		for (int j = 0; j < shelves.length; j++) {
+			for (int i = 0; i < games.length; i++) {
+				if(shelves[j].content(games[i])) {
+					gameAvailable = shelves[j].getGame(games[i]);
+					gameAvailable.takeGame();
+					shelves[j].modify(games[i], gameAvailable);
+					c.addPhysicGame(shelves[j].searchGame(games[i]));
+				}
+			}
+		}
+		
+		return client;
+	}
+	
+	private Client payGames(Client c) {
+		Client client = c;
+		Stack<Game> games = client.getPhysicGames();
+		Stack<Game> paidGame = new Stack<>();
+		
+		for(int i = 0; i < games.getSize(); i++) {
+			paidGame.add(games.pop());
+		}
+		
+		client.setPaidGames(paidGame);
+		
+		return client; 
+	}
+	
 	public Shelf[] getShelves() {
 		return shelves;
 	}
@@ -120,6 +158,14 @@ public class Store {
 
 	public void setClients(Client[] clients) {
 		this.clients = clients;
+	}
+
+	public int getCachier() {
+		return cachier;
+	}
+
+	public void setCachier(int cachier) {
+		this.cachier = cachier;
 	}
 }
 
