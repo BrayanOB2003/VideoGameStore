@@ -11,19 +11,21 @@ public class Store {
 		cachier = c;
 	}
 	
-	public boolean addShelf(String id, int g) {
+	public Shelf addShelf(String id, int g) {
 		Shelf newShelf = new Shelf(id, g);
 		boolean added = false;
-		for(int i = 0; i < shelves.length; i++) {
+		for(int i = 0; i < shelves.length && !added; i++) {
 			if(shelves[i] == null) {
 				shelves[i] = newShelf;
 				added = true;
+				return newShelf;
 			} else {
 				added = false;
 			}
 		}
 		
-		return added;
+		//return added;
+		return null;
 	}
 	
 	public boolean addClient(String id,Integer[] g, boolean typeOfSort) {
