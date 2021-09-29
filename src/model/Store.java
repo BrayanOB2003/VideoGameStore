@@ -10,7 +10,7 @@ public class Store {
 	public Store(int shelvesSize, int clientsSize, int c) {
 		shelves = new Shelf[shelvesSize];
 		clients = new Client[clientsSize];
-		cachier = c;
+		setCachier(c);
 	}
 	
 	public boolean createShelf(String id, int g) {
@@ -37,6 +37,22 @@ public class Store {
 		return added;
 	}
 	
+	public boolean verifyList(Integer[] codes) {
+		
+		boolean found = true;
+		
+		for (int i = 0; i < codes.length && found; i++) {
+			for (int j = 0; j < shelves.length; j++) {
+				if(!shelves[j].content(codes[i])) {
+					found = false;
+				}
+			}
+		}
+		
+		return found;
+		
+	}
+	
 	public Game getGame(String id, int ide) {
 		Game g = null;
 		for(int i = 0; i < shelves.length; i ++) {
@@ -53,10 +69,10 @@ public class Store {
 		boolean added = false;
 		newClient = searchGames(newClient);
 		newClient = searchPhysictGames(newClient);
-		for(int i = 0; i < clients.length; i++) {
+		
+		for(int i = 0; i < clients.length && !added; i++) {
 			if(clients[i] == null) {
 				clients[i] = newClient;
-				i = clients.length;
 				added = true;
 			}
 		}
@@ -125,6 +141,14 @@ public class Store {
 
 	public void setClients(Client[] clients) {
 		this.clients = clients;
+	}
+
+	public int getCachier() {
+		return cachier;
+	}
+
+	public void setCachier(int cachier) {
+		this.cachier = cachier;
 	}
 }
 

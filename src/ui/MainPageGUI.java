@@ -8,15 +8,14 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.KeyCode;
-import model.Shelf;
 import model.Store;
 
 public class MainPageGUI{
 	
 	private Store gameStore;
 	private int auxCountGame;
-	private Shelf auxShelf;
 	private int auxCountShelves;
+	private int auxCountClients;
 	
 	@FXML
     private TextField availableCashiers;
@@ -54,7 +53,41 @@ public class MainPageGUI{
 
     @FXML
     public void addGameToClient(ActionEvent event) {
-
+    	
+    	if(auxCountClients>0) {
+    		
+    		String idString = clientId.getText();
+        	String games = videogameCode.getText();
+        	String[] partStrings = games.split(", ");
+        	
+        	Integer[] gameList = new Integer[partStrings.length];
+        	
+        	for (int i = 0; i < partStrings.length; i++) {
+    			
+        		gameList[i] =  Integer.parseInt(partStrings[i]);
+    		}
+        	
+        	if(!gameStore.verifyList(gameList)) {
+        		sendAlert("Problema de catálogo", "Uno de los códigos ingresados no está en el catálogo, por favor verifique");
+        		videogameCode.setText("");
+        	}else {
+        		gameStore.addClient(idString, gameList);
+            	auxCountClients--;
+            	clientId.setText("");
+            	videogameCode.setText("");
+        	}
+        	
+    	}
+    	
+    	if(auxCountClients==0) {
+    		
+    		sendAlert("Información de clientes", "El número total de clientes añadidos se ha completado con éxito");
+    		clientId.setDisable(true);
+    		videogameCode.setDisable(true);
+    		
+    	}
+    	
+    	
     }
     
     @FXML
@@ -70,21 +103,48 @@ public class MainPageGUI{
     	
     	gameStore = new Store(shelf, client, cashier);
     	auxCountShelves = shelf;
+    	auxCountClients = client;
 
+    }
+    
+    @FXML
+    public void eraseData(ActionEvent event) {
+    	
+    	gameStore=null;
+    	enableTextField(shelfNumber);
+    	enableTextField(availableCashiers);
+    	enableTextField(clientSize);
+    	enableTextField(shelfId);
+    	enableTextField(shelfNumber);
+    	enableTextField(shelfSize);
+    	enableTextField(gameId);
+    	enableTextField(gamePrice);
+    	enableTextField(gameQuantity);
+    	enableTextField(gamePrice);
+    	enableTextField(clientId);
+    	enableTextField(videogameCode);
+ 
+
+    }
+    
+    public void enableTextField(TextField text) {
+    	text.setDisable(false);
+    	text.setText(null);
     }
 
     @FXML
     public void addGameToShelf(ActionEvent event) {
     	
+    	String shelfIdS = shelfId.getText();
+    	
     		if(auxCountGame>0) {
         		double aux = Double.parseDouble(gamePrice.getText());
         		int quantAux = Integer.parseInt(gameQuantity.getText());
         		int id = Integer.parseInt(gameId.getText());
-        		auxShelf.addGames(aux, id, quantAux);
+        		gameStore.addGamesToShelf(shelfIdS, aux, id, quantAux);
         		auxCountGame--;
         		if(auxCountGame==0) {
-        			sendAlert("Estantería", "La estantería " + auxShelf.getIdentifier() + " está completa");
-        			auxShelf=null;
+        			sendAlert("Estantería", "La estantería " + shelfIdS + " está completa");
         			auxCountShelves--;
         			shelfId.setDisable(false);
         			shelfSize.setDisable(false);
@@ -97,7 +157,6 @@ public class MainPageGUI{
     			gameQuantity.setText("");
         		
         	}
-        		System.out.println(auxCountShelves);
         		
         		if(auxCountShelves == 0) {
 					  sendAlert("Información de tienda", "Las estanterias han sido completadas exitosamente");
@@ -117,8 +176,19 @@ public class MainPageGUI{
 
     }
     
+    
     @FXML
-    public void shelfArranged(ActionEvent event) {
+    public void createShelf(ActionEvent event) {
+    	
+    	shelfSize.setDisable(true);
+		  shelfId.setDisable(true);
+		  
+		  if (auxCountShelves>0) {
+			  
+			  gameStore.createShelf(shelfId.getText(), Integer.parseInt(shelfSize.getText()));
+			  auxCountGame =  Integer.parseInt(shelfSize.getText());
+			  
+		  }
 
     }
     
@@ -163,7 +233,7 @@ public class MainPageGUI{
 				  
 				  if (auxCountShelves>0) {
 					  
-					  auxShelf = gameStore.addShelf(shelfId.getText(), Integer.parseInt(shelfSize.getText()));
+					  gameStore.createShelf(shelfId.getText(), Integer.parseInt(shelfSize.getText()));
 					  auxCountGame =  Integer.parseInt(shelfSize.getText());
 					  
 				  }
