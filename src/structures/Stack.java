@@ -47,9 +47,17 @@ public class Stack<T> implements basicOperations<T>{
 		
 		String output="";
 		
+<<<<<<< HEAD
 		StackNode<T> tmp = this.first;
 		if(first != null) {
 			output = toString(tmp, output);
+=======
+		StackNode<T> tmp = first;
+		
+		while (tmp!=null) {
+			output+=tmp.getElement() + " ";
+			tmp=tmp.getNext();
+>>>>>>> branch 'master' of https://github.com/BrayanOB2003/VideoGameStore.git
 		}
 		
 		return output;
