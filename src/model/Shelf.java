@@ -30,13 +30,20 @@ public class Shelf {
 		this.allGames = games;
 	}
 	
-	public void addGames(double p, int id, int q) {
+	public boolean addGames(double p, int id, int q) {
 		game = new Game(p, id, q);
-		shelf.insert(game.getIndentifier(), game);
+		return shelf.insert(game.getIndentifier(), game);
 	}
 	
 	public boolean content(int id) {
 		return shelf.contains(id);
 	}
-	
+
+	public Game getGame(int id) {
+		return shelf.search(id);
+	}
+
+	public void setGame(Game game) {
+		this.game = game;
+	}
 }
