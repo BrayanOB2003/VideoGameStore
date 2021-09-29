@@ -37,6 +37,22 @@ public class Store {
 		return added;
 	}
 	
+	public boolean verifyList(Integer[] codes) {
+		
+		boolean found = true;
+		
+		for (int i = 0; i < codes.length && found; i++) {
+			for (int j = 0; j < shelves.length; j++) {
+				if(!shelves[j].content(codes[i])) {
+					found = false;
+				}
+			}
+		}
+		
+		return found;
+		
+	}
+	
 	public Game getGame(String id, int ide) {
 		Game g = null;
 		for(int i = 0; i < shelves.length; i ++) {
@@ -51,11 +67,10 @@ public class Store {
 	public boolean addClient(String id,Integer[] g) {
 		Client newClient = new Client(id, g);
 		boolean added = false;
-		for(int i = 0; i < clients.length; i++) {
+		for(int i = 0; i < clients.length && !added; i++) {
 			if(clients[i] == null) {
 				newClient = searchGames(newClient);
 				clients[i] = newClient;
-				i = clients.length;
 				added = true;
 			}
 		}

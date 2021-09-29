@@ -191,7 +191,7 @@
                   <HBox alignment="CENTER" prefHeight="40.0" prefWidth="429.0" BorderPane.alignment="CENTER">
                      <children>
                         <Button mnemonicParsing="false" onAction="#createCase" text="Crear caso" />
-                        <Button mnemonicParsing="false" text="Limpiar entradas">
+                        <Button mnemonicParsing="false" onAction="#eraseData" text="Limpiar entradas">
                            <HBox.margin>
                               <Insets left="5.0" />
                            </HBox.margin>

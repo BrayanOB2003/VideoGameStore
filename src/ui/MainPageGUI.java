@@ -8,14 +8,12 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.KeyCode;
-import model.Shelf;
 import model.Store;
 
 public class MainPageGUI{
 	
 	private Store gameStore;
 	private int auxCountGame;
-	private Shelf auxShelf;
 	private int auxCountShelves;
 	private int auxCountClients;
 	
@@ -69,10 +67,19 @@ public class MainPageGUI{
         		gameList[i] =  Integer.parseInt(partStrings[i]);
     		}
         	
-        	gameStore.addClient(idString, gameList, true);
-        	auxCountClients--;
-    		
-    	}else {
+        	if(!gameStore.verifyList(gameList)) {
+        		sendAlert("Problema de catálogo", "Uno de los códigos ingresados no está en el catálogo, por favor verifique");
+        		videogameCode.setText("");
+        	}else {
+        		gameStore.addClient(idString, gameList);
+            	auxCountClients--;
+            	clientId.setText("");
+            	videogameCode.setText("");
+        	}
+        	
+    	}
+    	
+    	if(auxCountClients==0) {
     		
     		sendAlert("Información de clientes", "El número total de clientes añadidos se ha completado con éxito");
     		clientId.setDisable(true);
@@ -99,19 +106,45 @@ public class MainPageGUI{
     	auxCountClients = client;
 
     }
+    
+    @FXML
+    public void eraseData(ActionEvent event) {
+    	
+    	gameStore=null;
+    	enableTextField(shelfNumber);
+    	enableTextField(availableCashiers);
+    	enableTextField(clientSize);
+    	enableTextField(shelfId);
+    	enableTextField(shelfNumber);
+    	enableTextField(shelfSize);
+    	enableTextField(gameId);
+    	enableTextField(gamePrice);
+    	enableTextField(gameQuantity);
+    	enableTextField(gamePrice);
+    	enableTextField(clientId);
+    	enableTextField(videogameCode);
+ 
+
+    }
+    
+    public void enableTextField(TextField text) {
+    	text.setDisable(false);
+    	text.setText(null);
+    }
 
     @FXML
     public void addGameToShelf(ActionEvent event) {
+    	
+    	String shelfIdS = shelfId.getText();
     	
     		if(auxCountGame>0) {
         		double aux = Double.parseDouble(gamePrice.getText());
         		int quantAux = Integer.parseInt(gameQuantity.getText());
         		int id = Integer.parseInt(gameId.getText());
-        		auxShelf.addGames(aux, id, quantAux);
+        		gameStore.addGamesToShelf(shelfIdS, aux, id, quantAux);
         		auxCountGame--;
         		if(auxCountGame==0) {
-        			sendAlert("Estantería", "La estantería " + auxShelf.getIdentifier() + " está completa");
-        			auxShelf=null;
+        			sendAlert("Estantería", "La estantería " + shelfIdS + " está completa");
         			auxCountShelves--;
         			shelfId.setDisable(false);
         			shelfSize.setDisable(false);
@@ -152,7 +185,7 @@ public class MainPageGUI{
 		  
 		  if (auxCountShelves>0) {
 			  
-			  auxShelf = gameStore.addShelf(shelfId.getText(), Integer.parseInt(shelfSize.getText()));
+			  gameStore.createShelf(shelfId.getText(), Integer.parseInt(shelfSize.getText()));
 			  auxCountGame =  Integer.parseInt(shelfSize.getText());
 			  
 		  }
@@ -200,7 +233,7 @@ public class MainPageGUI{
 				  
 				  if (auxCountShelves>0) {
 					  
-					  auxShelf = gameStore.addShelf(shelfId.getText(), Integer.parseInt(shelfSize.getText()));
+					  gameStore.createShelf(shelfId.getText(), Integer.parseInt(shelfSize.getText()));
 					  auxCountGame =  Integer.parseInt(shelfSize.getText());
 					  
 				  }
