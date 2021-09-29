@@ -84,11 +84,19 @@
                                           <Insets left="5.0" right="5.0" top="5.0" />
                                        </VBox.margin>
                                     </TextField>
-                                    <TextField fx:id="shelfSize" alignment="CENTER" promptText="# videojuegos">
+                                    <HBox>
                                        <VBox.margin>
                                           <Insets left="5.0" right="5.0" top="5.0" />
                                        </VBox.margin>
-                                    </TextField>
+                                       <children>
+                                          <TextField fx:id="shelfSize" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="166.0" promptText="# videojuegos" HBox.hgrow="ALWAYS" />
+                                          <Button mnemonicParsing="false" onAction="#createShelf" text="Crear">
+                                             <HBox.margin>
+                                                <Insets left="5.0" />
+                                             </HBox.margin>
+                                          </Button>
+                                       </children>
+                                    </HBox>
                                     <Label text="Videojuegos">
                                        <font>
                                           <Font size="16.0" />
@@ -151,7 +159,7 @@
                                     </TextField>
                                     <HBox alignment="CENTER" prefHeight="41.0" prefWidth="275.0">
                                        <children>
-                                          <TextField fx:id="videogameCode" alignment="CENTER" prefHeight="25.0" prefWidth="102.0" promptText="Códigos de videojuegos" HBox.hgrow="ALWAYS">
+                                          <TextField fx:id="videogameCode" alignment="CENTER" prefHeight="25.0" prefWidth="102.0" promptText="Lista de códigos de videojuegos" HBox.hgrow="ALWAYS">
                                              <opaqueInsets>
                                                 <Insets right="10.0" />
                                              </opaqueInsets>

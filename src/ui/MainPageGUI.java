@@ -17,6 +17,7 @@ public class MainPageGUI{
 	private int auxCountGame;
 	private Shelf auxShelf;
 	private int auxCountShelves;
+	private int auxCountClients;
 	
 	@FXML
     private TextField availableCashiers;
@@ -54,7 +55,32 @@ public class MainPageGUI{
 
     @FXML
     public void addGameToClient(ActionEvent event) {
-
+    	
+    	if(auxCountClients>0) {
+    		
+    		String idString = clientId.getText();
+        	String games = videogameCode.getText();
+        	String[] partStrings = games.split(", ");
+        	
+        	Integer[] gameList = new Integer[partStrings.length];
+        	
+        	for (int i = 0; i < partStrings.length; i++) {
+    			
+        		gameList[i] =  Integer.parseInt(partStrings[i]);
+    		}
+        	
+        	gameStore.addClient(idString, gameList, true);
+        	auxCountClients--;
+    		
+    	}else {
+    		
+    		sendAlert("Información de clientes", "El número total de clientes añadidos se ha completado con éxito");
+    		clientId.setDisable(true);
+    		videogameCode.setDisable(true);
+    		
+    	}
+    	
+    	
     }
     
     @FXML
@@ -70,6 +96,7 @@ public class MainPageGUI{
     	
     	gameStore = new Store(shelf, client, cashier);
     	auxCountShelves = shelf;
+    	auxCountClients = client;
 
     }
 
@@ -97,7 +124,6 @@ public class MainPageGUI{
     			gameQuantity.setText("");
         		
         	}
-        		System.out.println(auxCountShelves);
         		
         		if(auxCountShelves == 0) {
 					  sendAlert("Información de tienda", "Las estanterias han sido completadas exitosamente");
@@ -117,8 +143,19 @@ public class MainPageGUI{
 
     }
     
+    
     @FXML
-    public void shelfArranged(ActionEvent event) {
+    public void createShelf(ActionEvent event) {
+    	
+    	shelfSize.setDisable(true);
+		  shelfId.setDisable(true);
+		  
+		  if (auxCountShelves>0) {
+			  
+			  auxShelf = gameStore.addShelf(shelfId.getText(), Integer.parseInt(shelfSize.getText()));
+			  auxCountGame =  Integer.parseInt(shelfSize.getText());
+			  
+		  }
 
     }
     
