@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Store {
 	private int cachier;
 	private Shelf[] shelves;
@@ -11,28 +13,51 @@ public class Store {
 		cachier = c;
 	}
 	
-	public boolean addShelf(String id, int g) {
+	public boolean createShelf(String id, int g) {
 		Shelf newShelf = new Shelf(id, g);
 		boolean added = false;
 		for(int i = 0; i < shelves.length; i++) {
 			if(shelves[i] == null) {
 				shelves[i] = newShelf;
 				added = true;
-			} else {
-				added = false;
+				i = shelves.length;
 			}
 		}
 		
 		return added;
 	}
 	
-	public boolean addClient(String id,Integer[] g, boolean typeOfSort) {
+	public boolean addGamesToShelf(String id, double p, int idGame, int q) {
+		
+		boolean added = false; 
+		for(int i = 0; i < shelves.length; i++) {
+			if(shelves[i].getIdentifier().equals(id)) {
+				added = shelves[i].addGames(p, idGame, q);
+			}
+		}
+		
+		return added;
+	}
+	
+	public Game getGame(String id, int ide) {
+		Game g = null;
+		for(int i = 0; i < shelves.length; i ++) {
+			if(shelves[i].getIdentifier().equals(id)) {
+				g = shelves[i].getGame(ide);
+			}
+		}
+		
+		return g;
+	}
+	
+	public boolean addClient(String id,Integer[] g) {
 		Client newClient = new Client(id, g);
-		newClient = searchGames(newClient,typeOfSort);
 		boolean added = false;
 		for(int i = 0; i < clients.length; i++) {
 			if(clients[i] == null) {
+				newClient = searchGames(newClient);
 				clients[i] = newClient;
+				i = clients.length;
 				added = true;
 			}
 		}
@@ -41,61 +66,47 @@ public class Store {
 		return added;
 	}
 	
-	private Client searchGames(Client c, boolean s) {
+	private Client searchGames(Client c) {
 		Client client = c;
 		Integer[] games = client.getGames();
 		
-		if(s) {
-			client.setGames(bubbleSort(client.getGames()));
-		} else {
-			client.setGames(selectionSort(client.getGames()));
-		}
-		
-		client.setGames(games);
+		client.setGames(sort(games));
 		return client;
 	}
 	
-	private Integer[] bubbleSort(Integer[] a) {
-	 
-		int auxiliar;
+	private Integer[] sort(Integer[] a) {
 		Integer[] games = a;
-		Integer[] arraySort;
-	    for(int i = 0; i < games.length; i++) {
-	       for(int j = 0;j < games.length-i;j++) {
-	         if(!shelves[i].content(games[j]) && shelves[i].content(games[j+1])) {
-	           auxiliar = games[j];
-	           games[j] = games[j+1];
-	           games[j+1] = auxiliar;
+		ArrayList<Integer> arraySort = new ArrayList<>();
+	    for(int i = 0; i < shelves.length; i++) {
+	       for(int j = 0;j < games.length;j++) {
+	         if (shelves[i].content(games[j])) {
+	        	 arraySort.add(games[j]);
 	         }
 	       }
 	    }
-	    arraySort = games;
-
-	    return arraySort;
+	    
+	    for(int i = 0; i < games.length; i++) {
+	    	games[i] = arraySort.get(i);
+	    }
+	    
+	    return games;
 	    
 	}
-	
-	private Integer[] selectionSort(Integer[] a) {
-		
-		int aux = 0;
-		Integer[] games = a;
-		Integer[] arraySort;
-		
-		for(int i = 0; i < games.length; i++) {
-			for(int j = 0; j < games.length-i; j++) {
-				
-				if(shelves[i].content(games[j])) {
-					aux = games[i];
-					games[i] = games[j];
-					games[j] = aux;
-				}
-			}
-		}
-		
-		arraySort = games;
-		
-		return arraySort;
+
+	public Shelf[] getShelves() {
+		return shelves;
 	}
-	
+
+	public void setShelves(Shelf[] shelves) {
+		this.shelves = shelves;
+	}
+
+	public Client[] getClients() {
+		return clients;
+	}
+
+	public void setClients(Client[] clients) {
+		this.clients = clients;
+	}
 }
 
