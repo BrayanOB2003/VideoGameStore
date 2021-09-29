@@ -16,14 +16,12 @@ public class Store {
 	public boolean createShelf(String id, int g) {
 		Shelf newShelf = new Shelf(id, g);
 		boolean added = false;
-		for(int i = 0; i < shelves.length; i++) {
+		for(int i = 0; i < shelves.length && !added; i++) {
 			if(shelves[i] == null) {
 				shelves[i] = newShelf;
 				added = true;
-				i = shelves.length;
 			}
 		}
-		
 		return added;
 	}
 	

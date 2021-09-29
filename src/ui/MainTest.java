@@ -23,7 +23,9 @@ public class MainTest {
 		Integer[] g = store.getClients()[0].getGames();
 		
 		String c = ""; 
-		
+		for(int i = 0; i < g.length; i++) {
+			c += g[i] + ", ";
+		}
 		System.out.println(c);
 	}
 }

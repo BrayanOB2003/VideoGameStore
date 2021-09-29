@@ -3,9 +3,7 @@ package structures;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
-import org.junit.validator.PublicClassValidator;
 
-import sun.security.krb5.KdcComm;
 
 class HashtableTest {
 	
