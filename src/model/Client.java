@@ -65,18 +65,10 @@ public class Client {
 	public String outputsClient() {
 		String output = "";
 		
-<<<<<<< HEAD
-=======
-		
->>>>>>> branch 'master' of https://github.com/BrayanOB2003/VideoGameStore.git
 		output = "********************"+ "\n" +
 		"Cliente: " + id + "\n" +
 		"Orden de recogida: " + getGames2() + "\n" +
-<<<<<<< HEAD
 		"Orden de facturación " + toString()  + "\n" +
-=======
-		"Orden de facturación " + physicGames.toString()  + "\n" +
->>>>>>> branch 'master' of https://github.com/BrayanOB2003/VideoGameStore.git
 		"Precio total de compra " + getPriceAllGame() + "\n" +
 		"****************************";
 		
