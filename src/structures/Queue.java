@@ -48,7 +48,7 @@ public class Queue<T> implements basicOperations<T>{
 
 	@Override
 	public T pop() {
-		T e;
+		T e = null;
 		if (first != null) {
 			if (first.getNext() != null) {
 				e = first.getNext().getElement();
