@@ -139,12 +139,11 @@ public class Store {
 		Stack<Game> paidGame = new Stack<>();
 		int aux = 0;
 		
-		for(int i = 0; i < clients.length; i++) {
-			aux = searchMinnor(clients, i);
-			for(int j = aux; j < cachier; j++) {
-				
-			}
-			i += cachier;
+		int i = 0;
+		int j = 0;
+		
+		while(i != j) {
+			
 		}
 		
 		client.setPaidGames(paidGame);
