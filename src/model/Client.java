@@ -38,4 +38,5 @@ public class Client {
 	public void addPhysicGame(int game) {
 		physicGames.add(game);
 	}
+	
 }
